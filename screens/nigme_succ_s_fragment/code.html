@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MISSION: EPITECH_VOID - TERMINAL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Geist:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .glass-panel {
+            background: rgba(19, 19, 21, 0.7);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .neon-border {
+            box-shadow: 0 0 15px rgba(0, 218, 243, 0.2);
+        }
+
+        .glitch-text {
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            2% { transform: translate(-2px, 2px); text-shadow: 2px 0 #ff00c1, -2px 0 #00fff9; }
+            4% { transform: translate(2px, -2px); text-shadow: -2px 0 #ff00c1, 2px 0 #00fff9; }
+            6% { transform: translate(0); text-shadow: none; }
+        }
+
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 218, 243, 0.1);
+            position: absolute;
+            top: 0;
+            z-index: 10;
+            animation: scan 8s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        .success-glow {
+            filter: drop-shadow(0 0 20px #4ae176);
+        }
+    </style>
+<!-- Include Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#690005",
+                      "on-secondary-container": "#c4abff",
+                      "on-tertiary-fixed": "#002109",
+                      "primary": "#c3f5ff",
+                      "surface-container": "#201f22",
+                      "primary-fixed-dim": "#00daf3",
+                      "on-background": "#e5e1e4",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "on-error-container": "#ffdad6",
+                      "tertiary-fixed": "#6bff8f",
+                      "tertiary-fixed-dim": "#4ae176",
+                      "on-tertiary": "#003915",
+                      "outline": "#849396",
+                      "outline-variant": "#3b494c",
+                      "surface-variant": "#353437",
+                      "on-primary": "#00363d",
+                      "surface-container-high": "#2a2a2c",
+                      "secondary-container": "#571bc1",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "on-primary-container": "#00626e",
+                      "tertiary": "#b2ffba",
+                      "on-surface-variant": "#bac9cc",
+                      "on-tertiary-fixed-variant": "#005321",
+                      "secondary": "#d0bcff",
+                      "on-primary-fixed-variant": "#004f58",
+                      "surface": "#131315",
+                      "inverse-surface": "#e5e1e4",
+                      "error-container": "#93000a",
+                      "on-secondary": "#3c0091",
+                      "inverse-primary": "#006875",
+                      "secondary-fixed": "#e9ddff",
+                      "primary-container": "#00e5ff",
+                      "background": "#131315",
+                      "surface-bright": "#39393b",
+                      "primary-fixed": "#9cf0ff",
+                      "surface-dim": "#131315",
+                      "surface-container-low": "#1c1b1d",
+                      "inverse-on-surface": "#313032",
+                      "surface-container-lowest": "#0e0e10",
+                      "error": "#ffb4ab",
+                      "on-surface": "#e5e1e4",
+                      "on-primary-fixed": "#001f24",
+                      "on-secondary-fixed": "#23005c",
+                      "surface-tint": "#00daf3",
+                      "surface-container-highest": "#353437",
+                      "tertiary-container": "#57ec7f",
+                      "on-tertiary-container": "#00682c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "stack-md": "16px",
+                      "grid-unit": "4px",
+                      "margin-desktop": "40px",
+                      "stack-lg": "32px",
+                      "margin-mobile": "20px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "body-main": ["Geist"],
+                      "label-caps": ["JetBrains Mono"],
+                      "display-lg": ["Space Grotesk"],
+                      "terminal-code": ["JetBrains Mono"],
+                      "headline-md-mobile": ["Space Grotesk"],
+                      "headline-md": ["Space Grotesk"]
+              },
+              "fontSize": {
+                      "body-main": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "terminal-code": ["16px", {"lineHeight": "24px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-md-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-main selection:bg-primary-fixed-dim selection:text-on-primary-fixed overflow-x-hidden">
+<!-- Global Background Shader -->
+
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full bg-surface/70 backdrop-blur-xl border-b border-primary/20 shadow-[0_0_15px_rgba(0,218,243,0.1)] flex justify-between items-center px-margin-mobile h-16 z-50">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-primary-fixed-dim">terminal</span>
+<span class="font-label-caps text-label-caps text-primary-fixed tracking-widest">MISSION: EPITECH_VOID</span>
+</div>
+<div class="flex items-center gap-stack-md text-primary-fixed-dim">
+<span class="font-label-caps text-label-caps tracking-tighter">00:42:15</span>
+<span class="material-symbols-outlined animate-spin" style="animation-duration: 4s;">hourglass_top</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="relative pt-24 pb-32 px-margin-mobile min-h-screen flex flex-col items-center" id="puzzle-view">
+<!-- HUD Fragment Header -->
+<div class="w-full max-w-4xl flex justify-between items-end mb-stack-lg border-l-2 border-primary-fixed-dim pl-stack-md">
+<div>
+<p class="font-label-caps text-label-caps text-primary-fixed opacity-70 uppercase">Decryption Progress</p>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary-fixed-dim">FRAGMENT 01/05</h1>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-outline-variant">STATUS: ACTIVE_DECRYPT</p>
+</div>
+</div>
+<div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-gutter items-start">
+<!-- Illustration Area -->
+<div class="relative glass-panel p-grid-unit rounded-xl overflow-hidden group">
+<div class="scanline"></div>
+<div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-primary-fixed-dim"></div>
+<div class="aspect-square w-full bg-surface-container-low overflow-hidden relative">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" data-alt="A dark, high-tech cybersecurity terminal screen showing complex green-on-black geometric cipher patterns, fractal data streams, and mysterious encrypted symbols. The visual is captured in a cinematic cyberpunk style with shallow depth of field, subtle lens flares, and digital noise artifacts, evoking an atmosphere of intense technological investigation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUnsyUVrCi5ndpkuyMnHnBQ8dEUaFdNrU5h9DJX_vkG9GC2nzUNMMfPS71pHjD3qbgTC7CsZ_jAJGCweCcxA4nuIS_WkjBLfLqSWjxT1B7fSbpzqQeBFeqMJatT_A0ovKrJs_uC48ADZ-a5cgb0NhS65_Ul_V2gQYL30lJnwqn676Y-3BjMPOVDxPGa_Y11TrG1HzQe-D3J9roQ6zDNHIXhlp-7_l6NRU4ya3DSkdSsDxj8CjK3R3P"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="font-terminal-code text-terminal-code text-primary-fixed-dim tracking-[0.5em] glitch-text bg-surface/50 p-stack-md backdrop-blur-sm">
+                            [X]_[Y]_[Z]
+                        </div>
+</div>
+</div>
+</div>
+<!-- Terminal Info & Input -->
+<div class="flex flex-col gap-stack-md">
+<div class="glass-panel p-stack-md rounded-xl border border-white/5 relative">
+<div class="font-label-caps text-label-caps text-primary-fixed mb-stack-sm flex justify-between">
+<span>SYSTEM_LOG</span>
+<span class="animate-pulse text-primary-fixed-dim">REC_SIGNAL</span>
+</div>
+<div class="font-terminal-code text-terminal-code text-on-surface-variant leading-relaxed">
+<p>&gt; Analysis required for data fragment. The sequence originates from the core mainframe. "Three voices speak, but only one is heard in the silence."</p>
+<p class="mt-stack-sm text-primary/40 text-[14px] italic">// HINT: Look for the hidden resonance in the visual patterns.</p>
+</div>
+</div>
+<div class="mt-stack-md space-y-stack-md">
+<div class="relative group">
+<label class="font-label-caps text-[10px] text-outline-variant block mb-1 tracking-widest uppercase">Encryption Key Input</label>
+<div class="relative border-b-2 border-outline-variant group-focus-within:border-primary-fixed-dim transition-colors duration-300 pb-2">
+<input class="w-full bg-transparent border-none focus:ring-0 font-terminal-code text-primary-fixed-dim text-headline-md-mobile placeholder:text-outline-variant/30 uppercase" id="cipher-input" placeholder="Enter keyword..." type="text"/>
+<span class="absolute right-0 bottom-3 w-4 h-6 bg-primary-fixed-dim cursor-blink inline-block"></span>
+</div>
+</div>
+<button class="w-full py-stack-md border-2 border-primary-fixed-dim text-primary-fixed-dim font-label-caps text-label-caps tracking-[0.2em] hover:bg-primary-fixed-dim/20 hover:shadow-[0_0_30px_rgba(0,218,243,0.3)] transition-all duration-300 active:scale-95 group relative overflow-hidden" onclick="showSuccess()">
+<span class="relative z-10">VALIDER</span>
+<div class="absolute inset-0 bg-primary-fixed-dim -translate-x-full group-hover:translate-x-0 transition-transform duration-500 opacity-10"></div>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Overlay (Hidden by Default) -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-margin-mobile" id="success-overlay">
+<div class="absolute inset-0 bg-surface/90 backdrop-blur-2xl"></div>
+<div class="relative w-full max-w-2xl text-center space-y-stack-lg">
+<!-- Animated SVG Ring -->
+<div class="relative mx-auto w-48 h-48">
+<!-- STITCH_SHADER_START:ANIMATION_2 class="w-full h-full success-glow" -->
+<div class="w-full h-full success-glow" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_2" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_2');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+uniform float u_time;
+uniform vec2 u_resolution;
+varying vec2 v_texCoord;
+
+void main() {
+    vec2 uv = v_texCoord;
+    vec3 color = vec3(0.035, 0.035, 0.043); // Deep background #09090B
+    
+    // Grid effect
+    vec2 grid = fract(uv * 20.0 - u_time * 0.05);
+    float line = smoothstep(0.02, 0.0, grid.x) + smoothstep(0.02, 0.0, grid.y);
+    color += line * vec3(0.0, 0.898, 1.0) * 0.1; // Cyan glow
+    
+    // Scanline
+    float scanline = sin(uv.y * 100.0 + u_time * 5.0) * 0.02;
+    color += scanline * vec3(0.0, 0.898, 1.0);
+    
+    // Pulsing particles / data bits
+    for(int i = 0; i < 5; i++) {
+        float fi = float(i);
+        vec2 p = vec2(sin(u_time * 0.5 + fi), cos(u_time * 0.3 + fi)) * 0.5 + 0.5;
+        float d = length(uv - p);
+        color += (0.01 / d) * vec3(0.545, 0.361, 0.965); // Violet accent
+    }
+
+    gl_FragColor = vec4(color, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_2 -->
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-headline-md text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1, 'wght' 700;">check_circle</span>
+</div>
+</div>
+<div class="space-y-stack-sm">
+<h2 class="font-headline-md text-headline-md text-tertiary-fixed-dim tracking-tight glitch-text">FRAGMENT RESTAURÉ</h2>
+<div class="font-terminal-code text-display-lg text-primary-fixed tracking-[0.2em] success-glow">
+                    C O D E
+                </div>
+</div>
+<div class="glass-panel p-stack-lg rounded-2xl border border-tertiary/20 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-stack-sm text-[10px] font-label-caps text-tertiary/30">HINT_REVEALED</div>
+<p class="font-body-main italic text-on-surface-variant relative z-10 text-lg leading-relaxed">
+                    "Les réponses préfèrent parfois les endroits que l'on regarde sans vraiment les voir."
+                </p>
+<div class="absolute bottom-0 left-0 h-1 bg-tertiary w-full origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-1000"></div>
+</div>
+<button class="px-stack-lg py-stack-md border-2 border-tertiary text-tertiary font-label-caps text-label-caps tracking-[0.2em] hover:bg-tertiary/20 hover:shadow-[0_0_30px_rgba(74,225,118,0.3)] transition-all duration-300" onclick="hideSuccess()">
+                RETOURNER AU HUD
+            </button>
+</div>
+</div>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 w-full bg-surface/80 backdrop-blur-lg border-t border-primary/20 shadow-[0_-4px_20px_rgba(0,0,0,0.5)] z-50 pb-safe">
+<div class="flex justify-around items-center px-4 py-2 w-full h-16">
+<!-- DECRYPT (Active) -->
+<button class="flex flex-col items-center justify-center text-primary-fixed-dim bg-primary/10 rounded-xl p-stack-sm ring-1 ring-primary/40 transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined" data-icon="lock_open" style="font-variation-settings: 'FILL' 1;">lock_open</span>
+<span class="font-label-caps text-[10px] mt-1">DECRYPT</span>
+</button>
+<!-- NETWORK -->
+<button class="flex flex-col items-center justify-center text-outline-variant p-stack-sm hover:text-primary-fixed transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+<span class="font-label-caps text-[10px] mt-1">NETWORK</span>
+</button>
+<!-- FRAGMENTS -->
+<button class="flex flex-col items-center justify-center text-outline-variant p-stack-sm hover:text-primary-fixed transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="Memory">cloud_download</span>
+<span class="font-label-caps text-[10px] mt-1">FRAGMENTS</span>
+</button>
+<!-- LOGS -->
+<button class="flex flex-col items-center justify-center text-outline-variant p-stack-sm hover:text-primary-fixed transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-label-caps text-[10px] mt-1">LOGS</span>
+</button>
+</div>
+</nav>
+<script>
+        function showSuccess() {
+            const input = document.getElementById('cipher-input').value.trim().toUpperCase();
+            // Basic logic simulation
+            if (input === 'CODE') {
+                document.getElementById('success-overlay').classList.remove('hidden');
+                document.getElementById('success-overlay').classList.add('flex');
+            } else {
+                alert('ACCESS DENIED: KEYWORD INCORRECT');
+                document.getElementById('cipher-input').value = '';
+            }
+        }
+
+        function hideSuccess() {
+            document.getElementById('success-overlay').classList.add('hidden');
+            document.getElementById('success-overlay').classList.remove('flex');
+        }
+
+        // Add character-by-character appearance simulation for terminal box
+        document.addEventListener('DOMContentLoaded', () => {
+            const terminalText = document.querySelectorAll('p');
+            // Micro-interaction: blinking cursor logic for input handled by CSS
+        });
+    </script>
+</body></html>

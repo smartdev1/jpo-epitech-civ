@@ -1,0 +1,17 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="42%" r="65%">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" fill="#09090B"/>
+  <rect width="512" height="512" fill="url(#glow)"/>
+  <g stroke="#00E5FF" stroke-width="10" fill="none">
+    <path d="M96 140 L96 100 L136 100"/>
+    <path d="M416 140 L416 100 L376 100"/>
+    <path d="M96 372 L96 412 L136 412"/>
+    <path d="M416 372 L416 412 L376 412"/>
+  </g>
+  <text x="256" y="300" font-family="JetBrains Mono, monospace" font-size="150" font-weight="700" fill="#00E5FF" text-anchor="middle" dominant-baseline="middle">&gt;_</text>
+</svg>

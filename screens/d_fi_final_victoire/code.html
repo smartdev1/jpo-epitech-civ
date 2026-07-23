@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Geist:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --cyan-glow: rgba(0, 218, 243, 0.5);
+            --neon-border: rgba(0, 218, 243, 0.3);
+        }
+        
+        body {
+            background-color: #131315;
+            color: #e5e1e4;
+            overflow-x: hidden;
+            font-family: 'Geist', sans-serif;
+        }
+
+        .glass-panel {
+            background: rgba(19, 19, 21, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .neon-border-top-left {
+            position: relative;
+        }
+        .neon-border-top-left::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 12px;
+            height: 12px;
+            border-top: 2px solid #00daf3;
+            border-left: 2px solid #00daf3;
+        }
+
+        .floating-card-container {
+            perspective: 1000px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .orbital-ring {
+            width: 320px;
+            height: 320px;
+            border: 1px dashed rgba(0, 218, 243, 0.2);
+            border-radius: 50%;
+            position: absolute;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .floating-card {
+            position: absolute;
+            width: 100px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 218, 243, 0.05);
+            border: 1px solid rgba(0, 218, 243, 0.3);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .floating-card:hover {
+            background: rgba(0, 218, 243, 0.2);
+            box-shadow: 0 0 20px rgba(0, 218, 243, 0.3);
+            scale: 1.1;
+        }
+
+        .glitch-text {
+            text-shadow: 2px 0 #ff00c1, -2px 0 #00fff9;
+            animation: glitch 3s infinite alternate-reverse;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 2px 0 #ff00c1, -2px 0 #00fff9; }
+            50% { text-shadow: -1px 0 #ff00c1, 1px 0 #00fff9; }
+            100% { text-shadow: 1px 0 #ff00c1, -1px 0 #00fff9; }
+        }
+
+        .matrix-bg {
+            mask-image: linear-gradient(to bottom, transparent, black, transparent);
+        }
+
+        .cursor-blink {
+            display: inline-block;
+            width: 8px;
+            height: 18px;
+            background: #e5e1e4;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Success Particle Animation Simulation */
+        .particle-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#690005",
+                      "on-secondary-container": "#c4abff",
+                      "on-tertiary-fixed": "#002109",
+                      "primary": "#c3f5ff",
+                      "surface-container": "#201f22",
+                      "primary-fixed-dim": "#00daf3",
+                      "on-background": "#e5e1e4",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "on-error-container": "#ffdad6",
+                      "tertiary-fixed": "#6bff8f",
+                      "tertiary-fixed-dim": "#4ae176",
+                      "on-tertiary": "#003915",
+                      "outline": "#849396",
+                      "outline-variant": "#3b494c",
+                      "surface-variant": "#353437",
+                      "on-primary": "#00363d",
+                      "surface-container-high": "#2a2a2c",
+                      "secondary-container": "#571bc1",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "on-primary-container": "#00626e",
+                      "tertiary": "#b2ffba",
+                      "on-surface-variant": "#bac9cc",
+                      "on-tertiary-fixed-variant": "#005321",
+                      "secondary": "#d0bcff",
+                      "on-primary-fixed-variant": "#004f58",
+                      "surface": "#131315",
+                      "inverse-surface": "#e5e1e4",
+                      "error-container": "#93000a",
+                      "on-secondary": "#3c0091",
+                      "inverse-primary": "#006875",
+                      "secondary-fixed": "#e9ddff",
+                      "primary-container": "#00e5ff",
+                      "background": "#131315",
+                      "surface-bright": "#39393b",
+                      "primary-fixed": "#9cf0ff",
+                      "surface-dim": "#131315",
+                      "surface-container-low": "#1c1b1d",
+                      "inverse-on-surface": "#313032",
+                      "surface-container-lowest": "#0e0e10",
+                      "error": "#ffb4ab",
+                      "on-surface": "#e5e1e4",
+                      "on-primary-fixed": "#001f24",
+                      "on-secondary-fixed": "#23005c",
+                      "surface-tint": "#00daf3",
+                      "surface-container-highest": "#353437",
+                      "tertiary-container": "#57ec7f",
+                      "on-tertiary-container": "#00682c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "stack-md": "16px",
+                      "grid-unit": "4px",
+                      "margin-desktop": "40px",
+                      "stack-lg": "32px",
+                      "margin-mobile": "20px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "body-main": ["Geist"],
+                      "label-caps": ["JetBrains Mono"],
+                      "display-lg": ["Space Grotesk"],
+                      "terminal-code": ["JetBrains Mono"],
+                      "headline-md-mobile": ["Space Grotesk"],
+                      "headline-md": ["Space Grotesk"]
+              },
+              "fontSize": {
+                      "body-main": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "terminal-code": ["16px", {"lineHeight": "24px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-md-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full bg-surface/70 backdrop-blur-xl border-b border-primary/20 shadow-[0_0_15px_rgba(0,218,243,0.1)] flex justify-between items-center px-margin-mobile h-16 w-full z-50">
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">terminal</span>
+<span class="font-label-caps text-label-caps text-primary-fixed tracking-widest">MISSION: EPITECH_VOID</span>
+</div>
+<div class="flex items-center gap-stack-md">
+<span class="font-terminal-code text-primary-fixed-dim tracking-tighter">04:59</span>
+<span class="material-symbols-outlined text-primary-fixed-dim">hourglass_top</span>
+</div>
+</header>
+<!-- MAIN SCREEN: BOSS CHALLENGE -->
+<main class="min-h-screen pt-24 pb-32 px-margin-mobile flex flex-col items-center justify-center transition-opacity duration-1000" id="boss-screen">
+
+<div class="relative z-10 w-full max-w-lg text-center">
+<!-- Floating Cards Animation -->
+<div class="floating-card-container mb-stack-lg">
+<div class="orbital-ring"></div>
+<div id="orbitals">
+<!-- Cards will be positioned by script or manual offsets -->
+<div class="floating-card" style="transform: rotate(0deg) translate(140px) rotate(0deg);">CODE</div>
+<div class="floating-card" style="transform: rotate(72deg) translate(140px) rotate(-72deg);">PROGRAMME</div>
+<div class="floating-card" style="transform: rotate(144deg) translate(140px) rotate(-144deg);">BUG</div>
+<div class="floating-card" style="transform: rotate(216deg) translate(140px) rotate(-216deg);">LANGAGE</div>
+<div class="floating-card" style="transform: rotate(288deg) translate(140px) rotate(-288deg);">ALGORITHME</div>
+</div>
+<!-- Central Core -->
+<div class="w-24 h-24 rounded-full border-2 border-primary-fixed-dim/40 flex items-center justify-center animate-pulse">
+<span class="material-symbols-outlined text-primary-fixed-dim text-4xl" style="font-variation-settings: 'FILL' 1;">key</span>
+</div>
+</div>
+<h1 class="font-display-lg text-headline-md-mobile mb-stack-md glitch-text tracking-tight uppercase">
+                ANALYSIS COMPLETE.
+            </h1>
+<p class="font-terminal-code text-on-surface-variant text-sm mb-stack-lg uppercase">
+                ENTER MASTER KEY TO RESTORE SYSTEM CORE.
+            </p>
+<div class="space-y-stack-md">
+<div class="relative group">
+<div class="absolute -inset-0.5 bg-primary-fixed-dim/20 rounded-lg blur opacity-75 group-focus-within:opacity-100 transition duration-1000"></div>
+<input class="relative w-full bg-surface-container-lowest border-2 border-primary/30 rounded-lg p-stack-md font-terminal-code text-primary-fixed focus:outline-none focus:border-primary-fixed-dim transition-all text-center placeholder:text-outline-variant/50" id="master-key" placeholder="COMMAND_INPUT" type="text"/>
+</div>
+<p class="font-body-main text-sm text-outline flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-xs">help_outline</span>
+                    Hint: "What links them all?"
+                </p>
+<button class="w-full h-14 border-2 border-primary-fixed-dim bg-transparent hover:bg-primary-fixed-dim/10 text-primary-fixed-dim font-label-caps tracking-[0.2em] transition-all flex items-center justify-center gap-stack-md active:scale-95 group" onclick="checkSuccess()">
+                    EXECUTE_RESTORATION
+                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">bolt</span>
+</button>
+</div>
+</div>
+</main>
+<!-- SUCCESS SCREEN (Hidden initially) -->
+<section class="fixed inset-0 z-[100] bg-background hidden items-center justify-center px-margin-mobile overflow-hidden" id="victory-screen">
+<!-- STITCH_SHADER_START:ANIMATION_2 class="absolute inset-0 w-full h-full opacity-60" -->
+<div class="absolute inset-0 w-full h-full opacity-60" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_2" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_2');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+uniform float u_time;
+uniform vec2 u_resolution;
+varying vec2 v_texCoord;
+
+void main() {
+    vec2 uv = v_texCoord;
+    vec3 color = vec3(0.035, 0.035, 0.043); // Deep background #09090B
+    
+    // Grid effect
+    vec2 grid = fract(uv * 20.0 - u_time * 0.05);
+    float line = smoothstep(0.02, 0.0, grid.x) + smoothstep(0.02, 0.0, grid.y);
+    color += line * vec3(0.0, 0.898, 1.0) * 0.1; // Cyan glow
+    
+    // Scanline
+    float scanline = sin(uv.y * 100.0 + u_time * 5.0) * 0.02;
+    color += scanline * vec3(0.0, 0.898, 1.0);
+    
+    // Pulsing particles / data bits
+    for(int i = 0; i < 5; i++) {
+        float fi = float(i);
+        vec2 p = vec2(sin(u_time * 0.5 + fi), cos(u_time * 0.3 + fi)) * 0.5 + 0.5;
+        float d = length(uv - p);
+        color += (0.01 / d) * vec3(0.545, 0.361, 0.965); // Violet accent
+    }
+
+    gl_FragColor = vec4(color, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_2 -->
+<div class="particle-container" id="matrix-rain">
+
+</div>
+<div class="relative z-10 w-full max-w-2xl glass-panel p-stack-lg rounded-xl neon-border-top-left border-primary/20 flex flex-col items-center text-center">
+<div class="w-24 h-24 mb-stack-lg relative">
+<div class="absolute inset-0 rounded-full border-2 border-tertiary-fixed animate-ping opacity-25"></div>
+<div class="w-full h-full rounded-full border-4 border-tertiary-fixed flex items-center justify-center bg-tertiary-container/10">
+<span class="material-symbols-outlined text-tertiary-fixed text-6xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<h2 class="font-display-lg text-headline-md md:text-display-lg text-tertiary-fixed mb-stack-md leading-none">
+                SYSTÈME RESTAURÉ.<br/>MISSION ACCOMPLIE !
+            </h2>
+<p class="font-body-main text-on-surface-variant text-lg mb-stack-lg max-w-md">
+                Vous avez restauré le cœur du système. Bienvenue dans l'univers <span class="text-primary-fixed font-bold">EPITECH</span>.
+            </p>
+<div class="flex flex-col md:flex-row gap-stack-md w-full">
+<button class="flex-1 h-14 border-2 border-primary-fixed-dim text-primary-fixed-dim font-label-caps hover:bg-primary/5 transition-all">
+                    VOIR LES RÉSULTATS
+                </button>
+<button class="flex-1 h-14 bg-primary-fixed-dim text-on-primary font-label-caps hover:brightness-110 transition-all shadow-[0_0_20px_rgba(0,218,243,0.3)]">
+                    RETOUR À L'ACCUEIL
+                </button>
+</div>
+<div class="mt-stack-lg pt-stack-lg border-t border-primary/10 w-full">
+<div class="flex justify-between items-center text-outline-variant font-label-caps text-[10px]">
+<span>PROTOCOL: COMPLETE</span>
+<span>ENCRYPTION: AES-256-V2</span>
+<span>USER: INVITED_GUEST</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 w-full bg-surface/80 backdrop-blur-lg border-t border-primary/20 shadow-[0_-4px_20px_rgba(0,0,0,0.5)] z-50 pb-safe md:hidden">
+<div class="flex justify-around items-center px-4 py-2 w-full">
+<div class="flex flex-col items-center justify-center text-outline-variant p-stack-sm">
+<span class="material-symbols-outlined">lock_open</span>
+<span class="font-label-caps text-[10px] mt-1">DECRYPT</span>
+</div>
+<div class="flex flex-col items-center justify-center text-outline-variant p-stack-sm">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-label-caps text-[10px] mt-1">NETWORK</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary-fixed-dim bg-primary/10 rounded-xl p-stack-sm ring-1 ring-primary/40">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">memory</span>
+<span class="font-label-caps text-[10px] mt-1">FRAGMENTS</span>
+</div>
+<div class="flex flex-col items-center justify-center text-outline-variant p-stack-sm">
+<span class="material-symbols-outlined">database</span>
+<span class="font-label-caps text-[10px] mt-1">LOGS</span>
+</div>
+</div>
+</nav>
+<script>
+        function checkSuccess() {
+            const input = document.getElementById('master-key').value.toLowerCase();
+            // In an escape game context, the logic "links them all" usually implies a word like "informatique" or "ordinateur" or just "EPITECH"
+            // For the sake of the demo interaction:
+            if (input.length > 3) {
+                document.getElementById('boss-screen').classList.add('opacity-0');
+                setTimeout(() => {
+                    document.getElementById('boss-screen').style.display = 'none';
+                    document.getElementById('victory-screen').style.display = 'flex';
+                    document.getElementById('victory-screen').classList.add('animate-fade-in');
+                }, 1000);
+            } else {
+                // Glitch effect on error
+                const inputField = document.getElementById('master-key');
+                inputField.classList.add('border-error');
+                inputField.animate([
+                    { transform: 'translateX(-5px)' },
+                    { transform: 'translateX(5px)' },
+                    { transform: 'translateX(-5px)' },
+                    { transform: 'translateX(0)' }
+                ], { duration: 200 });
+                setTimeout(() => inputField.classList.remove('border-error'), 500);
+            }
+        }
+
+        // Floating cards animation sync
+        let angle = 0;
+        const orbitals = document.querySelectorAll('.floating-card');
+        function animateOrbit() {
+            angle += 0.5;
+            orbitals.forEach((card, index) => {
+                const cardAngle = angle + (index * (360 / orbitals.length));
+                card.style.transform = `rotate(${cardAngle}deg) translate(140px) rotate(-${cardAngle}deg)`;
+            });
+            requestAnimationFrame(animateOrbit);
+        }
+        animateOrbit();
+    </script>
+</body></html>
