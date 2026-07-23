@@ -7,7 +7,7 @@ export const FRAGMENTS: Fragment[] = [
     title: 'Fragment I — Communication',
     type: 'charade',
     prompt:
-      "Mon premier est une boisson chaude très appréciée des développeurs.\nMon deuxième est la troisième lettre de l'alphabet.\nMon tout permet de communiquer avec un ordinateur.",
+      "Levez les yeux: une instruction se cache ici. Les machines m'obeissent, les humains me lisent.",
     answer: 'CODE',
     successPercent: 20,
     hint: 'Là où les objets disparaissent sans jamais vraiment revenir,\nune nouvelle piste attend les plus curieux.',
@@ -26,7 +26,7 @@ export const FRAGMENTS: Fragment[] = [
     ],
     answer: 'PROGRAMME',
     successPercent: 40,
-    hint: "Certains gardent l'eau fraîche,\nd'autres les secrets.",
+    hint: "Certains gardent l'eau fraîche,\nd'autres les secrets. (Prise murale)",
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ export const FRAGMENTS: Fragment[] = [
       'Je ne suis jamais invité.\nPourtant je finis toujours par apparaître.\nLes développeurs passent leurs journées\nà essayer de me faire disparaître.\nQui suis-je ?',
     answer: 'BUG',
     successPercent: 60,
-    hint: 'Ce qui réchauffe parfois les repas\nne réchauffera pas forcément votre piste...\nregardez autrement.',
+    hint: 'Ce qui réchauffe parfois les repas\nne réchauffera pas forcément votre piste...\nregardez autrement. ',
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ export const FRAGMENTS: Fragment[] = [
     rebus: ['speak', 'laptop'],
     answer: 'LANGAGE',
     successPercent: 80,
-    hint: "Certains ouvrent des portes avec une clé.\nD'autres cachent davantage sous ce qu'ils soutiennent.",
+    hint: "Certains ouvrent des portes avec une clé.\nD'autres cachent davantage sous ce qu'ils soutiennent. (Armoire)",
   },
   {
     id: 5,
@@ -59,7 +59,7 @@ export const FRAGMENTS: Fragment[] = [
       "Je suis une suite d'étapes.\nSans moi,\nGoogle ne chercherait rien.\nLes GPS seraient perdus.\nLes robots seraient immobiles.\nQui suis-je ?",
     answer: 'ALGORITHME',
     successPercent: 100,
-    hint: 'Dernier fragment retrouvé.\nLe système est presque restauré.\nScannez le dernier QR Code.',
+    hint: 'Dernier fragment retrouvé.\nLe système est presque restauré.\nScannez le dernier QR Code. (Ferme moi)',
   },
 ]
 

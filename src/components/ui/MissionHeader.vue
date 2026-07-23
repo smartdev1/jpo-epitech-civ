@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useGameStore } from '@/stores/game'
-import { TOTAL_FRAGMENTS } from '@/types/game'
+import { CRITICAL_TIME_SECONDS, MISSION_DURATION_SECONDS, TOTAL_FRAGMENTS } from '@/types/game'
 
 const store = useGameStore()
 const now = ref(Date.now())
@@ -12,16 +12,19 @@ onMounted(() => {
 })
 onUnmounted(() => clearInterval(intervalId))
 
-const elapsed = computed(() => {
-  if (!store.startTime) return 0
-  return Math.max(0, Math.floor((now.value - new Date(store.startTime).getTime()) / 1000))
+const remaining = computed(() => {
+  if (!store.startTime) return MISSION_DURATION_SECONDS
+  const elapsed = Math.floor((now.value - new Date(store.startTime).getTime()) / 1000)
+  return Math.min(MISSION_DURATION_SECONDS, Math.max(0, MISSION_DURATION_SECONDS - elapsed))
 })
 
 const formatted = computed(() => {
-  const minutes = Math.floor(elapsed.value / 60)
-  const seconds = elapsed.value % 60
+  const minutes = Math.floor(remaining.value / 60)
+  const seconds = remaining.value % 60
   return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
 })
+
+const isCritical = computed(() => remaining.value <= CRITICAL_TIME_SECONDS)
 </script>
 
 <template>
@@ -32,7 +35,7 @@ const formatted = computed(() => {
     </div>
     <div class="flex items-center gap-4 font-mono-terminal text-xs">
       <span class="text-ink-dim">{{ store.fragmentsCount }}/{{ TOTAL_FRAGMENTS }}</span>
-      <span class="text-primary">{{ formatted }}</span>
+      <span :class="isCritical ? 'inline-block text-error animate-timer-alert' : 'text-primary'">{{ formatted }}</span>
     </div>
   </header>
 </template>

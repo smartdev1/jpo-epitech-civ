@@ -36,3 +36,5 @@ export interface GameState {
 export const TOTAL_FRAGMENTS = 5
 export const FINAL_CHECKPOINT = TOTAL_FRAGMENTS + 1
 export const FINAL_WORD = 'LOGICIEL'
+export const MISSION_DURATION_SECONDS = 15 * 60
+export const CRITICAL_TIME_SECONDS = 10
