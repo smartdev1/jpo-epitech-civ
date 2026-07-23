@@ -27,8 +27,8 @@ export const useGameStore = defineStore('game', {
       saveState(this.$state)
     },
 
-    createTeam(teamName: string, players: number) {
-      this.team = { teamName, players, startTime: new Date().toISOString() }
+    createTeam(teamName: string) {
+      this.team = { teamName, startTime: new Date().toISOString() }
       this.persist()
     },
 
@@ -62,15 +62,24 @@ export const useGameStore = defineStore('game', {
       return correct
     },
 
-    submitFinal(answers: string[]): boolean {
+    /** Checks the 5 re-entered fragment words. Does not complete the mission by itself. */
+    verifyFragments(answers: string[]): boolean {
       this.attempts++
       const allCorrect = FRAGMENTS.every((fragment, index) => normalize(answers[index] ?? '') === normalize(fragment.answer))
-      if (allCorrect) {
+      this.persist()
+      return allCorrect
+    },
+
+    /** Checks the deduced master word (what links all 5 fragments). Completes the mission. */
+    submitMasterKey(word: string): boolean {
+      this.attempts++
+      const correct = normalize(word) === normalize(FINAL_WORD)
+      if (correct) {
         this.finalValidated = true
         this.completed = true
       }
       this.persist()
-      return allCorrect
+      return correct
     },
 
     resetGame() {

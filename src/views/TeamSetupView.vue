@@ -10,7 +10,6 @@ const router = useRouter()
 const store = useGameStore()
 
 const teamName = ref('')
-const players = ref(4)
 const error = ref('')
 
 function submit() {
@@ -19,12 +18,8 @@ function submit() {
     error.value = 'Le nom d’équipe est requis.'
     return
   }
-  if (players.value < 3 || players.value > 6) {
-    error.value = 'Le nombre de participants doit être entre 3 et 6.'
-    return
-  }
   error.value = ''
-  store.createTeam(name, players.value)
+  store.createTeam(name)
   router.push({ name: 'dashboard' })
 }
 </script>
@@ -46,17 +41,6 @@ function submit() {
               maxlength="24"
               placeholder="EX: NULL_POINTER"
               class="w-full border-b-2 border-white/15 bg-transparent pb-2 font-mono-terminal text-lg uppercase text-primary placeholder:text-ink-dim/40 focus:border-primary focus:outline-none"
-            />
-          </label>
-
-          <label class="block">
-            <span class="mb-1 block font-mono-terminal text-[10px] uppercase tracking-widest text-ink-dim">Nombre de participants (3 à 6)</span>
-            <input
-              v-model.number="players"
-              type="number"
-              min="3"
-              max="6"
-              class="w-full border-b-2 border-white/15 bg-transparent pb-2 font-mono-terminal text-lg text-primary focus:border-primary focus:outline-none"
             />
           </label>
 

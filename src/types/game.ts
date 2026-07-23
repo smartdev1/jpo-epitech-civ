@@ -1,13 +1,12 @@
 export interface TeamInfo {
   teamName: string
-  players: number
   startTime: string
 }
 
 export type FragmentType = 'charade' | 'images' | 'riddle' | 'rebus' | 'logic'
 
 export interface FragmentImage {
-  icon: string
+  iconKey: string
   label: string
 }
 

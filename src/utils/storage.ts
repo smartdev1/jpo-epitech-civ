@@ -4,7 +4,7 @@ export const STORAGE_KEY = 'epitech-void-save'
 
 export function createInitialState(): GameState {
   return {
-    team: { teamName: '', players: 0, startTime: '' },
+    team: { teamName: '', startTime: '' },
     currentStep: 1,
     fragmentsFound: [],
     attempts: 0,

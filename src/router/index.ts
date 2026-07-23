@@ -71,8 +71,9 @@ router.beforeEach((to) => {
     }
   }
 
-  if (to.name === 'final' && store.currentStep !== FINAL_CHECKPOINT) {
-    return { name: 'dashboard' }
+  if (to.name === 'final') {
+    if (store.completed) return { name: 'victory' }
+    if (store.currentStep !== FINAL_CHECKPOINT) return { name: 'dashboard' }
   }
 
   if (to.name === 'victory' && !store.finalValidated) {

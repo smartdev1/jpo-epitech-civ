@@ -10,6 +10,7 @@ import HudCard from '@/components/ui/HudCard.vue'
 import NeonButton from '@/components/ui/NeonButton.vue'
 import TypewriterText from '@/components/effects/TypewriterText.vue'
 import ParticleField from '@/components/effects/ParticleField.vue'
+import { PUZZLE_ICONS } from '@/components/puzzle-icons'
 
 const route = useRoute()
 const router = useRouter()
@@ -64,15 +65,15 @@ function backToDashboard() {
 
         <div v-if="fragment.type === 'images' && fragment.images" class="mt-4 grid grid-cols-2 gap-3">
           <div v-for="img in fragment.images" :key="img.label" class="flex flex-col items-center gap-2 border border-white/10 bg-surface/60 py-6">
-            <span class="text-4xl">{{ img.icon }}</span>
+            <component :is="PUZZLE_ICONS[img.iconKey]" class="h-12 w-12 text-primary" />
             <span class="font-mono-terminal text-[10px] uppercase text-ink-dim">{{ img.label }}</span>
           </div>
         </div>
 
         <div v-if="fragment.type === 'rebus' && fragment.rebus" class="mt-4 flex items-center justify-center gap-6 py-6">
-          <template v-for="(symbol, i) in fragment.rebus" :key="i">
-            <span class="text-5xl">{{ symbol }}</span>
-            <span v-if="i < fragment.rebus.length - 1" class="font-display text-2xl text-primary">+</span>
+          <template v-for="(iconKey, i) in fragment.rebus" :key="i">
+            <component :is="PUZZLE_ICONS[iconKey]" class="h-16 w-16 text-primary" />
+            <span v-if="i < fragment.rebus.length - 1" class="font-display text-2xl text-accent">+</span>
           </template>
         </div>
       </HudCard>

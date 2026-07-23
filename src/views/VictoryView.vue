@@ -2,7 +2,6 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGameStore, FINAL_WORD } from '@/stores/game'
-import { FRAGMENTS } from '@/data/fragments'
 import MatrixRain from '@/components/effects/MatrixRain.vue'
 import ParticleField from '@/components/effects/ParticleField.vue'
 import GlitchText from '@/components/effects/GlitchText.vue'
@@ -12,32 +11,12 @@ import { vibrateSuccess } from '@/utils/haptics'
 const router = useRouter()
 const store = useGameStore()
 
-type Phase = 'checklist' | 'connecting' | 'revealing' | 'celebrate'
-const phase = ref<Phase>('checklist')
-const checkedLines = ref<string[]>([])
-
-function padLine(key: string): string {
-  const dots = '.'.repeat(Math.max(3, 16 - key.length))
-  return `${key} ${dots} OK`
-}
+type Phase = 'connecting' | 'revealing' | 'celebrate'
+const phase = ref<Phase>('connecting')
 
 onMounted(() => {
-  let i = 0
-  const revealNext = () => {
-    if (i < FRAGMENTS.length) {
-      checkedLines.value.push(padLine(FRAGMENTS[i]!.key))
-      i++
-      setTimeout(revealNext, 450)
-    } else {
-      setTimeout(() => (phase.value = 'connecting'), 500)
-    }
-  }
-  setTimeout(revealNext, 400)
+  setTimeout(() => (phase.value = 'revealing'), 1800)
 })
-
-function onConnectingDone() {
-  setTimeout(() => (phase.value = 'revealing'), 1600)
-}
 
 function onRevealingDone() {
   setTimeout(() => {
@@ -59,9 +38,7 @@ function restart() {
   router.push({ name: 'splash' })
 }
 
-// Trigger the phase progression chain
 watch(phase, (p) => {
-  if (p === 'connecting') onConnectingDone()
   if (p === 'revealing') onRevealingDone()
 })
 </script>
@@ -72,13 +49,7 @@ watch(phase, (p) => {
     <ParticleField v-if="phase === 'celebrate'" />
 
     <transition name="fade-slide" mode="out-in">
-      <div v-if="phase === 'checklist'" key="checklist" class="relative z-10 w-full max-w-sm">
-        <div class="glass-panel hud-corner rounded-lg p-6 font-mono-terminal text-sm">
-          <p v-for="line in checkedLines" :key="line" class="text-success text-glow-success">{{ line }}</p>
-        </div>
-      </div>
-
-      <div v-else-if="phase === 'connecting'" key="connecting" class="relative z-10 text-center">
+      <div v-if="phase === 'connecting'" key="connecting" class="relative z-10 text-center">
         <p class="font-mono-terminal text-lg uppercase tracking-widest text-primary text-glow-primary animate-pulse-glow">
           CONNEXION AU NOYAU CENTRAL...
         </p>

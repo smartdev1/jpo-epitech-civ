@@ -76,11 +76,12 @@ function confirmReset() {
                 'text-ink-dim/50': statusOf(fragment.id, fragment.key) === 'locked',
               }"
             >
-              {{ fragment.key }}
+              <template v-if="statusOf(fragment.id, fragment.key) === 'done'">{{ fragment.key }}</template>
+              <template v-else>FRAGMENT {{ fragment.id.toString().padStart(2, '0') }}</template>
             </span>
             <span class="font-mono-terminal text-xs">
               <span v-if="statusOf(fragment.id, fragment.key) === 'done'" class="text-success">✓ RESTAURÉ</span>
-              <span v-else-if="statusOf(fragment.id, fragment.key) === 'current'" class="text-primary">● ACTIF</span>
+              <span v-else-if="statusOf(fragment.id, fragment.key) === 'current'" class="text-primary">● NON DÉCRYPTÉ</span>
               <span v-else class="text-ink-dim/50">🔒 VERROUILLÉ</span>
             </span>
           </li>
