@@ -19,10 +19,10 @@ export const FRAGMENTS: Fragment[] = [
     type: 'images',
     prompt: 'Quatre images, un seul mot. Observez-les attentivement.',
     images: [
-      { iconKey: 'monitor', label: 'écran ordinateur' },
-      { iconKey: 'calendar', label: 'calendrier' },
-      { iconKey: 'play', label: 'bouton lecture' },
-      { iconKey: 'developer', label: 'développeur devant un ordinateur' },
+      { iconKey: 'child', label: 'Un enfant devant un ordinateur' },
+      { iconKey: 'codeScreen', label: 'Un écran avec du code' },
+      { iconKey: 'robot', label: 'Un robot' },
+      { iconKey: 'puzzle', label: 'Des blocs de programmation' },
     ],
     answer: 'PROGRAMME',
     successPercent: 40,
@@ -34,7 +34,7 @@ export const FRAGMENTS: Fragment[] = [
     title: 'Fragment III — Anomalie',
     type: 'riddle',
     prompt:
-      'Je ne suis jamais invité.\nPourtant je finis toujours par apparaître.\nLes développeurs passent leurs journées\nà essayer de me faire disparaître.\nQui suis-je ?',
+      'Je ne suis jamais invité.\nPourtant je finis toujours par apparaître.\nLes développeurs passent leurs journées\nà essayer de me faire disparaître. \nOn me traduit litteralement par insecte.\nQui suis-je ?',
     answer: 'BUG',
     successPercent: 60,
     hint: 'Ce qui réchauffe parfois les repas\nne réchauffera pas forcément votre piste...\nregardez autrement. ',
