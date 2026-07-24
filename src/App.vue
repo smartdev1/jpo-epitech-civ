@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import TimeUpOverlay from '@/components/TimeUpOverlay.vue'
+</script>
 
 <template>
   <div class="min-h-dvh w-full bg-background text-ink">
@@ -7,6 +9,7 @@
         <component :is="Component" :key="route.fullPath" />
       </transition>
     </router-view>
+    <TimeUpOverlay />
   </div>
 </template>
 

@@ -26,7 +26,7 @@ export const FRAGMENTS: Fragment[] = [
     ],
     answer: 'PROGRAMME',
     successPercent: 40,
-    hint: "Certains gardent l'eau fraîche,\nd'autres les secrets. (Prise murale)",
+    hint: "Je  dors dans le mur, mais je reveille les machines. Cherche-moi là où l'energie nourrit les écrans et fait vivre la technologie.",
   },
   {
     id: 3,
@@ -48,7 +48,7 @@ export const FRAGMENTS: Fragment[] = [
     rebus: ['speak', 'laptop'],
     answer: 'LANGAGE',
     successPercent: 80,
-    hint: "Certains ouvrent des portes avec une clé.\nD'autres cachent davantage sous ce qu'ils soutiennent. (Armoire)",
+    hint: "Je suis caché sous un point d'eau, discrète mais utile. Dèrriere mes portes se cachenr peut-être les réponses que tu cherches",
   },
   {
     id: 5,
@@ -59,7 +59,7 @@ export const FRAGMENTS: Fragment[] = [
       "Je suis une suite d'étapes.\nSans moi,\nGoogle ne chercherait rien.\nLes GPS seraient perdus.\nLes robots seraient immobiles.\nQui suis-je ?",
     answer: 'ALGORITHME',
     successPercent: 100,
-    hint: 'Dernier fragment retrouvé.\nLe système est presque restauré.\nScannez le dernier QR Code. (Ferme moi)',
+    hint: 'Fadel va completer moi je ne sais pas quoi mettre',
   },
 ]
 

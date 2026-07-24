@@ -104,12 +104,17 @@ function confirmReset() {
       </button>
     </div>
 
-    <button
-      class="fixed bottom-8 right-6 z-40 flex h-16 w-16 items-center justify-center rounded-full border-4 border-primary/60 bg-primary text-background shadow-[0_0_30px_rgba(0,229,255,0.5)] transition-transform active:scale-90"
-      @click="showScanner = true"
-    >
-      <span class="text-2xl">▣</span>
-    </button>
+    <div class="fixed bottom-8 right-6 z-40 flex items-center gap-3">
+      <span class="rounded-full bg-surface/80 px-3 py-1.5 font-mono-terminal text-[10px] uppercase tracking-widest text-primary shadow-[0_0_15px_rgba(0,229,255,0.15)] backdrop-blur-sm">
+        Clique pour scanner
+      </span>
+      <button
+        class="flex h-16 w-16 items-center justify-center rounded-full border-4 border-primary/60 bg-primary text-background shadow-[0_0_30px_rgba(0,229,255,0.5)] transition-transform active:scale-90"
+        @click="showScanner = true"
+      >
+        <span class="text-2xl">▣</span>
+      </button>
+    </div>
 
     <QrScannerModal v-if="showScanner" @close="showScanner = false" @scanned="onScanned" />
 

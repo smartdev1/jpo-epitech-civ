@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 
-const props = withDefaults(defineProps<{ opacity?: number; density?: number }>(), {
+const props = withDefaults(defineProps<{ opacity?: number; density?: number; rgb?: string }>(), {
   opacity: 0.12,
   density: 18,
+  rgb: '0, 229, 255',
 })
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
@@ -33,7 +34,7 @@ onMounted(() => {
     if (!ctx || !canvas) return
     ctx.fillStyle = 'rgba(9, 9, 11, 0.15)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = `rgba(0, 229, 255, ${props.opacity})`
+    ctx.fillStyle = `rgba(${props.rgb}, ${props.opacity})`
     ctx.font = `${props.density - 4}px 'JetBrains Mono', monospace`
     for (let i = 0; i < drops.length; i++) {
       const char = CHARS[Math.floor(Math.random() * CHARS.length)]!
