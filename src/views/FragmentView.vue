@@ -11,6 +11,7 @@ import NeonButton from '@/components/ui/NeonButton.vue'
 import TypewriterText from '@/components/effects/TypewriterText.vue'
 import ParticleField from '@/components/effects/ParticleField.vue'
 import { PUZZLE_ICONS } from '@/components/puzzle-icons'
+import FragmentSuccessCard from '@/components/FragmentSuccessCard.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -80,7 +81,10 @@ function backToDashboard() {
 
       <div class="flex flex-col gap-3" :class="shake ? 'animate-glitch' : ''">
         <label class="block">
-          <span class="mb-1 block font-mono-terminal text-[10px] uppercase tracking-widest text-ink-dim">Réponse</span>
+          <span class="mb-1 flex items-center justify-between font-mono-terminal text-[10px] uppercase tracking-widest text-ink-dim">
+            <span>Réponse</span>
+            <span class="text-primary/70">{{ answer.trim().length }}/{{ fragment.answer.length }}</span>
+          </span>
           <input
             v-model="answer"
             type="text"
@@ -96,16 +100,7 @@ function backToDashboard() {
 
     <transition name="fade-slide">
       <div v-if="success" class="fixed inset-0 z-[95] flex items-center justify-center bg-background/95 px-6 backdrop-blur-md">
-        <div class="glass-panel hud-corner w-full max-w-md rounded-2xl border border-success/30 p-8 text-center">
-          <p class="mb-2 font-mono-terminal text-xs uppercase tracking-widest text-success">FRAGMENT RETROUVÉ</p>
-          <h2 class="mb-1 font-display text-4xl tracking-[0.2em] text-success text-glow-success">{{ fragment.key }}</h2>
-          <p class="mb-6 font-mono-terminal text-sm text-primary">{{ fragment.successPercent }}% DU SYSTÈME RESTAURÉ</p>
-          <div class="mb-6 h-1.5 w-full overflow-hidden bg-white/10">
-            <div class="h-full bg-success shadow-[0_0_12px_rgba(34,197,94,0.7)] transition-all" :style="{ width: fragment.successPercent + '%' }"></div>
-          </div>
-          <p class="mb-8 whitespace-pre-line font-mono-terminal text-xs italic leading-relaxed text-ink-dim">{{ fragment.hint }}</p>
-          <NeonButton variant="success" @click="backToDashboard">Retourner au HUD</NeonButton>
-        </div>
+        <FragmentSuccessCard :fragment="fragment" @back="backToDashboard" />
       </div>
     </transition>
   </main>

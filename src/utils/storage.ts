@@ -11,6 +11,9 @@ export function createInitialState(): GameState {
     startTime: '',
     completed: false,
     finalValidated: false,
+    scanToken: null,
+    scanTokenStep: null,
+    unlockedStep: 0,
   }
 }
 

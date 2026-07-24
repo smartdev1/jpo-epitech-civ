@@ -31,6 +31,9 @@ export interface GameState {
   startTime: string
   completed: boolean
   finalValidated: boolean
+  scanToken: string | null
+  scanTokenStep: number | null
+  unlockedStep: number
 }
 
 export const TOTAL_FRAGMENTS = 5

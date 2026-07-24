@@ -29,7 +29,8 @@ function statusOf(fragmentId: number, key: string): 'done' | 'current' | 'locked
 function onScanned(step: number) {
   showScanner.value = false
   const code = step.toString().padStart(3, '0')
-  router.push({ name: 'checkpoint', params: { code } })
+  const token = store.issueScanToken(step)
+  router.push({ name: 'checkpoint', params: { code }, query: { t: token } })
 }
 
 function confirmReset() {

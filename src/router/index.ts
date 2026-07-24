@@ -66,14 +66,14 @@ router.beforeEach((to) => {
 
   if (to.name === 'fragment') {
     const id = Number(to.params.id)
-    if (!Number.isInteger(id) || id < 1 || id > TOTAL_FRAGMENTS || store.currentStep !== id) {
+    if (!Number.isInteger(id) || id < 1 || id > TOTAL_FRAGMENTS || store.currentStep !== id || store.unlockedStep !== id) {
       return { name: 'dashboard' }
     }
   }
 
   if (to.name === 'final') {
     if (store.completed) return { name: 'victory' }
-    if (store.currentStep !== FINAL_CHECKPOINT) return { name: 'dashboard' }
+    if (store.currentStep !== FINAL_CHECKPOINT || store.unlockedStep !== FINAL_CHECKPOINT) return { name: 'dashboard' }
   }
 
   if (to.name === 'victory' && !store.finalValidated) {

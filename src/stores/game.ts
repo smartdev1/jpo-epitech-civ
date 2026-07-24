@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { FINAL_CHECKPOINT, FINAL_WORD, type GameState } from '@/types/game'
 import { FRAGMENTS } from '@/data/fragments'
 import { createInitialState, loadState, saveState, clearState } from '@/utils/storage'
+import { generateScanToken } from '@/utils/token'
 
 function normalize(value: string): string {
   return value
@@ -47,6 +48,27 @@ export const useGameStore = defineStore('game', {
         this.persist()
       }
       return granted
+    },
+
+    /** Mints a one-time proof-of-scan token for the given step. Only the in-app scanner calls this. */
+    issueScanToken(step: number): string {
+      const token = generateScanToken()
+      this.scanToken = token
+      this.scanTokenStep = step
+      this.persist()
+      return token
+    },
+
+    /** Consumes a proof-of-scan token, unlocking that step's puzzle route. Fails silently on mismatch. */
+    consumeScanToken(step: number, token: string): boolean {
+      const valid = Boolean(token) && this.scanToken === token && this.scanTokenStep === step
+      if (valid) {
+        this.unlockedStep = step
+        this.scanToken = null
+        this.scanTokenStep = null
+        this.persist()
+      }
+      return valid
     },
 
     submitFragmentAnswer(fragmentId: number, answer: string): boolean {

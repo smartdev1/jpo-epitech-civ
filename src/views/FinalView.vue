@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useGameStore } from '@/stores/game'
+import { useGameStore, FINAL_WORD } from '@/stores/game'
 import { FRAGMENTS } from '@/data/fragments'
 import { vibrateError } from '@/utils/haptics'
 import HudCard from '@/components/ui/HudCard.vue'
@@ -92,7 +92,10 @@ function submitMasterKey() {
           <transition name="fade-slide">
             <form v-if="phase === 'form'" class="mt-6 flex flex-col gap-4" :class="shake ? 'animate-glitch' : ''" @submit.prevent="submitFragments">
               <label v-for="(label, i) in labels" :key="label" class="block">
-                <span class="mb-1 block font-mono-terminal text-[10px] uppercase tracking-widest text-ink-dim">{{ label }}</span>
+                <span class="mb-1 flex items-center justify-between font-mono-terminal text-[10px] uppercase tracking-widest text-ink-dim">
+                  <span>{{ label }}</span>
+                  <span class="text-primary/70">{{ answers[i]!.trim().length }}/{{ FRAGMENTS[i]!.answer.length }}</span>
+                </span>
                 <input
                   v-model="answers[i]"
                   type="text"
@@ -118,12 +121,18 @@ function submitMasterKey() {
           </p>
 
           <form class="flex flex-col gap-4" :class="masterKeyShake ? 'animate-glitch' : ''" @submit.prevent="submitMasterKey">
-            <input
-              v-model="masterKey"
-              type="text"
-              placeholder="MOT-CLÉ..."
-              class="w-full border-b-2 border-white/15 bg-transparent pb-2 text-center font-mono-terminal text-xl uppercase tracking-[0.2em] text-primary placeholder:text-ink-dim/30 focus:border-primary focus:outline-none"
-            />
+            <div>
+              <span class="mb-1 flex items-center justify-between font-mono-terminal text-[10px] uppercase tracking-widest text-ink-dim">
+                <span>Mot-clé</span>
+                <span class="text-primary/70">{{ masterKey.trim().length }}/{{ FINAL_WORD.length }}</span>
+              </span>
+              <input
+                v-model="masterKey"
+                type="text"
+                placeholder="MOT-CLÉ..."
+                class="w-full border-b-2 border-white/15 bg-transparent pb-2 text-center font-mono-terminal text-xl uppercase tracking-[0.2em] text-primary placeholder:text-ink-dim/30 focus:border-primary focus:outline-none"
+              />
+            </div>
             <p class="text-center font-mono-terminal text-xs italic text-ink-dim">
               Indice : qu'est-ce que le CODE, le PROGRAMME, le BUG, le LANGAGE et l'ALGORITHME ont en commun ?
             </p>
