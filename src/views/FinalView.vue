@@ -134,7 +134,7 @@ function submitMasterKey() {
               />
             </div>
             <p class="text-center font-mono-terminal text-xs italic text-ink-dim">
-              Indice : qu'est-ce que le CODE, le PROGRAMME, le BUG, le LANGAGE et l'ALGORITHME ont en commun ?
+              Indice : Tous ces mots prennent vie au sein d'un même univers. Quel est-il ? (L_______L)
             </p>
             <p v-if="masterKeyError" class="text-center font-mono-terminal text-xs text-error text-glow-error">{{ masterKeyError }}</p>
             <NeonButton type="submit" variant="primary">Restaurer le noyau</NeonButton>

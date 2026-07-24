@@ -26,7 +26,7 @@ export const FRAGMENTS: Fragment[] = [
     ],
     answer: 'PROGRAMME',
     successPercent: 40,
-    hint: "Je  dors dans le mur, mais je reveille les machines. Cherche-moi là où l'energie nourrit les écrans et fait vivre la technologie.",
+    hint: "Je  dors dans le mur, mais je reveille les machines. Cherchez-moi là où l'energie nourrit les écrans et fait vivre la technologie.",
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ export const FRAGMENTS: Fragment[] = [
       'Je ne suis jamais invité.\nPourtant je finis toujours par apparaître.\nLes développeurs passent leurs journées\nà essayer de me faire disparaître. \nOn me traduit litteralement par insecte.\nQui suis-je ?',
     answer: 'BUG',
     successPercent: 60,
-    hint: 'Ce qui réchauffe parfois les repas\nne réchauffera pas forcément votre piste...\nregardez autrement. ',
+    hint: 'Ce qui réchauffe parfois les repas\nne réchauffera pas forcément votre piste...\nRegardez autrement. ',
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ export const FRAGMENTS: Fragment[] = [
     rebus: ['speak', 'laptop'],
     answer: 'LANGAGE',
     successPercent: 80,
-    hint: "Je suis caché sous un point d'eau, discrète mais utile. Dèrriere mes portes se cachenr peut-être les réponses que tu cherches",
+    hint: "Je suis caché sous un point d'eau, discrète mais utile. Dèrriere mes portes se trouvent peut-être les réponses que vous cherchez.",
   },
   {
     id: 5,
@@ -59,7 +59,7 @@ export const FRAGMENTS: Fragment[] = [
       "Je suis une suite d'étapes.\nSans moi,\nGoogle ne chercherait rien.\nLes GPS seraient perdus.\nLes robots seraient immobiles.\nQui suis-je ?",
     answer: 'ALGORITHME',
     successPercent: 100,
-    hint: 'Fadel va completer moi je ne sais pas quoi mettre',
+    hint: 'Ouverte, j\'ai lancé votre aventure. Retournez-moi, et vous en trouverez la fin.',
   },
 ]
 
